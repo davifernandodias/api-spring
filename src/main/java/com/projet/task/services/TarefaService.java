@@ -20,7 +20,7 @@ public class TarefaService {
 
     public Tarefa adicionarTarefa(Tarefa tarefa) {
         if (tarefaComMesmoNomeExiste(tarefa.getNomeDatarefa())) {
-            throw new IllegalArgumentException("Já existe uma tarefa com o mesmo nome.");
+            throw new IllegalArgumentException("Já existe uma tarefa com o nome: " + tarefa.getNomeDatarefa());
         }
 
         tarefa.setOrdemDeSequenciaDaTarefa(obterOrdemSequencial());
@@ -43,15 +43,16 @@ public class TarefaService {
 
     public Tarefa atualizarTarefa(Long id, Tarefa tarefaAtualizada) {
         Tarefa tarefaExistente = tarefaRepository.findById(id).orElseThrow(() -> 
-            new IllegalArgumentException("Tarefa não encontrada.")
+            new IllegalArgumentException("Tarefa não encontrada com id: " + id)
         );
 
         if (tarefaAtualizada.getNomeDatarefa() != null && 
             !tarefaAtualizada.getNomeDatarefa().equals(tarefaExistente.getNomeDatarefa()) &&
             tarefaComMesmoNomeExiste(tarefaAtualizada.getNomeDatarefa())) {
-            throw new IllegalArgumentException("Já existe uma tarefa com o mesmo nome. Não é possível atualizar.");
+            throw new IllegalArgumentException("Já existe uma tarefa com o nome: " + tarefaAtualizada.getNomeDatarefa());
         }
 
+        // Atualiza campos se não forem nulos
         if (tarefaAtualizada.getNomeDatarefa() != null) {
             tarefaExistente.setNomeDatarefa(tarefaAtualizada.getNomeDatarefa());
         }
@@ -67,7 +68,7 @@ public class TarefaService {
 
     public void deletarTarefa(Long id) {
         Tarefa tarefa = tarefaRepository.findById(id).orElseThrow(() -> 
-            new IllegalArgumentException("Tarefa não encontrada.")
+            new IllegalArgumentException("Tarefa não encontrada com id: " + id)
         );
         tarefaRepository.delete(tarefa);
     }
