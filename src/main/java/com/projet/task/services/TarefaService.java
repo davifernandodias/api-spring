@@ -23,14 +23,16 @@ public class TarefaService {
             throw new IllegalArgumentException("Já existe uma tarefa com o nome: " + tarefa.getNomeDatarefa());
         }
 
+        // Aqui, agora garantimos que a ordem seja sempre sequencial
         tarefa.setOrdemDeSequenciaDaTarefa(obterOrdemSequencial());
 
         return tarefaRepository.save(tarefa);
     }
 
     private Long obterOrdemSequencial() {
+        // Buscamos o maior valor de ordemDeSequenciaDaTarefa e somamos 1
         Long ordemMaxima = tarefaRepository.buscarMaiorOrdemSequencial();
-        return (ordemMaxima != null) ? ordemMaxima + 1 : 0L; // Caso não tenha tarefas, começa com 0
+        return (ordemMaxima != null) ? ordemMaxima + 1 : 0L; // Começa com 0 se não houver nenhuma tarefa
     }
 
     public Tarefa buscarTarefaPorId(Long id) {
