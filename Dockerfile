@@ -7,6 +7,9 @@ WORKDIR /app
 # Copia o código-fonte do projeto para o contêiner
 COPY . .
 
+# Garantir que o script mvnw tenha permissões de execução
+RUN chmod +x ./mvnw
+
 # Executa a compilação do JAR (supondo que você use Maven ou Gradle)
 RUN ./mvnw clean package -DskipTests
 
