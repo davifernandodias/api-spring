@@ -10,6 +10,7 @@ import com.projet.task.services.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200") // Permite requisições da URL do frontend
 @RestController
 @RequestMapping("/tarefas")
 public class TarefaController {
