@@ -14,11 +14,8 @@ public class Tarefa {
     private Long id;
 
     private String nomeDatarefa;
-
     private Double custoDaTarefa;
-
     private LocalDate dataLimiteDaTarefa;
-
     private Long ordemDeSequenciaDaTarefa;
 
     // Getters e Setters
@@ -61,5 +58,4 @@ public class Tarefa {
     public void setOrdemDeSequenciaDaTarefa(Long ordemDeSequenciaDaTarefa) {
         this.ordemDeSequenciaDaTarefa = ordemDeSequenciaDaTarefa;
     }
-
 }
